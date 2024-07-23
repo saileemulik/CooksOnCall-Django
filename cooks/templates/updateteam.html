@@ -1,0 +1,12 @@
+{% extends "basic.html" %}
+{% block title %}Update Team{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<h2>Update Team Cook Profile</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endblock body %}
+{% block js %}{% endblock js %}

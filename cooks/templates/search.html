@@ -1,0 +1,88 @@
+{% extends "basic.html" %}
+{% block title %} Search {% endblock title %}
+{% block css %}
+<style>
+    .container {
+        margin-top: 20px;
+    }
+    .form-inline {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .form-control {
+        width: 300px;
+        margin-right: 10px;
+    }
+    .search-results {
+        margin-top: 20px;
+    }
+    .cook-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .cook-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .cook-card:hover {
+        transform: scale(1.05);
+    }
+    .cook-card img {
+        width: 100%;
+        height: 300px;
+    }
+    .cook-card-body {
+        padding: 15px;
+    }
+    .cook-card-body h3 {
+        margin-top: 0;
+    }
+    .cook-card-body p {
+        margin: 5px 0;
+    }
+    .cook-card-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container">
+    <form class="form-inline mt-3" method="get" action="/search/">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Another Cook Here" aria-label="Search" name="search" id="search">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <div class="search-results">
+        <h1 class="text-center">Search Results</h1>
+        {% for category, cook_list, slide_range, slides in allCook %}
+            <h2 class="mt-5">{{ category }} Cook Results:</h2>
+            <div class="cook-grid">
+                {% for cook in cook_list %}
+                    <div class="cook-card">
+                        <img src="{{ cook.photo.url }}" alt="{{ cook.username }}" width="200px" height="300px">
+                        <div class="cook-card-body">
+                            <h3>{{ cook.username }}</h3>
+                            <p>{{ cook.speciality }} - {{ cook.dish }}</p>
+                            <p>Experience: {{ cook.experience }} years</p>
+                            <div class="cook-card-buttons">
+                                <form method="get" action="/checkout/">
+                                    <input type="hidden" name="cook_id" value="{{ cook.id }}">
+                                    <button type="submit" class="btn btn-warning cart">Book Now</button>
+                                </form>
+                                <a href="{% url 'cookView' id=cook.id %}" class="btn btn-secondary cart">Quick View</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}
+{% block js %}{% endblock js %}

@@ -1,0 +1,48 @@
+{% extends "basic.html" %}
+{% block title %}Single Cook Details{% endblock title %}
+{% block css %}
+<style>
+    .booking-card {
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .booking-card .card-body {
+        padding: 15px;
+    }
+
+    .booking-card h5 {
+        margin-bottom: 10px;
+        color: #007bff; /* Bootstrap primary color */
+    }
+
+    .booking-card p {
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container mt-4">
+    <h1>Bookings for {{ team_cook.username }}</h1>
+    <a href="{% url 'viewProfile' id=team_cook.id  %}" class="btn btn-secondary cart">View Profile</a>
+    {% if bookings %}
+        {% for booking in bookings %}
+            <div class="card booking-card">
+                <div class="card-body">
+                    <h5 class="card-title">Cook: {{ booking.name }}</h5>
+                    <p class="card-text"><strong>Name Of User:</strong> {{ booking.username }}</p>
+                    <p class="card-text"><strong>Date:</strong> {{ booking.cookTime }}</p>
+                    <p class="card-text"><strong>Time:</strong> {{ booking.time }}</p>
+                    <p class="card-text"><strong>Occasion:</strong> {{ booking.occasion }}</p>
+                    <p class="card-text"><strong>Speciality:</strong> {{ booking.speciality }}</p>
+                    <p class="card-text"><strong>Dish:</strong> {{ booking.dish }}</p>
+                    <p class="card-text"><strong>Address:</strong> {{ booking.address }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No bookings available.</p>
+    {% endif %}
+</div>
+{% endblock body %}
+{% block js %}{% endblock js %}

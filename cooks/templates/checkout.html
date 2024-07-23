@@ -1,0 +1,76 @@
+{% extends 'basic.html' %}
+{% block title %} Checkout {% endblock title %}
+{% block css %}
+<style>
+    /* Any additional CSS styles can go here */
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container-xxl mt-5 px-0 wow fadeInUp align-items-center" data-wow-delay="0.1s">
+    <h2>Step 1 - Checkout - Review Your Cook Bookings</h2>
+    <div class="row g-0 bg-dark text-white" style="min-height: 400px;">
+        <div class="col-md-4 p-5 image-container">
+            <img src="{{ cook.photo.url }}" alt="Profile Picture of {{ cook.username }}" class="img-fluid" width="350px" height="500px">
+            <br>
+            <div class="d-flex flex-column align-items-center">
+                <a href="javascript:history.back()" class="btn btn-warning mt-4">Go Back</a>
+                <button id="scrollButton" class="btn btn-warning mt-4">Next</button>
+            </div>
+        </div>
+        {% if cook %}
+        <div class="col-md-8 d-flex align-items-center p-5">
+            <div>
+                <h1 class="profile-header text-warning">{{ cook.username }}</h1>
+                <p class="profile-text"><strong class="text-warning">Speciality:</strong> {{ cook.speciality }}</p>
+                <p class="profile-text"><strong class="text-warning">Dish:</strong> {{ cook.dish }}</p>
+                <p class="profile-text"><strong class="text-warning">Experience:</strong> {{ cook.experience }} years</p>
+                <p class="profile-text"><strong class="text-warning">Email:</strong> {{ cook.email }}</p>
+                {% if is_single %}
+                    <p class="profile-text"><strong class="text-warning">Gender:</strong> {{ cook.gender }}</p>
+                {% else %}
+                    <p class="profile-text"><strong class="text-warning">Team Name:</strong> {{ cook.teamName }}</p>
+                    <p class="profile-text"><strong class="text-warning">Team Size:</strong> {{ cook.people }}</p>
+                {% endif %}
+                <p class="profile-text" style="text-align: justify;"><strong class="text-warning">Extra Details:</strong> {{ cook.desc }}</p>
+            </div>
+        </div>
+        {% else %}
+        <p>No cook selected.</p>
+        {% endif %}
+    </div>
+</div>
+<section id="target" class="pt-5">
+<div class="container-xxl mt-2 px-0 wow fadeInUp align-items-center" >
+    <h2>Step 2 - Enter Address & Other Details:</h2>
+    <div class="row g-0 bg-dark text-white">
+        <div class="col-md-6 p-5 image-container">
+            <img src="{{ cook.photo.url }}" alt="Profile Picture of {{ cook.username }}" class="img-fluid px-5" width="350px" height="500px">
+            <br>
+            <h1 class="profile-header text-warning p-5">Book {{ cook.username }}</h1>
+        </div>
+        <div class="col-md-6 form-group px-5 py-4">
+            <form method="post" action="/checkout/" class="p-4 shadow-sm rounded bg-dark text-white">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if cook %}
+                    <input type="hidden" name="cook_id" value="{{ cook.id }}" class="form-control">
+                {% endif %}
+                <button type="submit" class="btn btn-warning btn-block mt-3">Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock body %}
+{% block js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('scrollButton').addEventListener('click', function() {
+            const targetElement = document.getElementById('target');
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+{% endblock js %}

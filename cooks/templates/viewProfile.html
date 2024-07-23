@@ -1,0 +1,43 @@
+{% extends "basic.html" %}
+{% block title %}View Profile{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<div class="container-xxl mt-5 px-0 wow fadeInUp align-items-center" data-wow-delay="0.1s">
+    <div class="row g-0 bg-dark text-white" style="min-height: 400px;">
+        <div class="col-md-4 p-5 image-container">
+            <img src="{{ cook.photo.url }}" alt="Profile Picture of {{ cook.username }}" class="profile-img img-fluid" width="350px" height="500px"> 
+            <br>
+            <div class="d-flex flex-column align-items-center">
+                {% if is_single %}
+                <form method="get" action="/updatesingle/" class="m-3 ">
+                    <input type="hidden" name="cook_id" value="{{ cook.id }}">
+                    <button type="submit" class="btn btn-warning cart">Update</button>
+                </form>
+                {% else %}
+                <form method="get" action="/updateteam/" class="mb-3">
+                    <input type="hidden" name="cook_id" value="{{ cook.id }}">
+                    <button type="submit" class="btn btn-warning cart">Update</button>
+                </form>{% endif %}
+                <a href="javascript:history.back()" class="btn btn-warning">Go Back</a>
+            </div>
+        </div>
+        <div class="col-md-8 d-flex align-items-center p-5">
+            <div>
+                <h1 class="profile-header text-warning">{{ cook.username }}</h1>
+                <p class="profile-text"><strong class="text-warning">Speciality:</strong> {{ cook.speciality }}</p>
+                <p class="profile-text"><strong class="text-warning">Dish:</strong> {{ cook.dish }}</p>
+                <p class="profile-text"><strong class="text-warning">Experience:</strong> {{ cook.experience }} years</p>
+                <p class="profile-text"><strong class="text-warning">Email:</strong> {{ cook.email }}</p>
+                {% if is_single %}
+                    <p class="profile-text"><strong class="text-warning">Gender:</strong> {{ cook.gender }}</p>
+                {% else %}
+                    <p class="profile-text"><strong class="text-warning">Team Name:</strong> {{ cook.teamName }}</p>
+                    <p class="profile-text"><strong class="text-warning">Team Size:</strong> {{ cook.people }}</p>
+                {% endif %}
+                <p class="profile-text" style="text-align: justify;"><strong class="text-warning">Extra Details:</strong> {{ cook.desc }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}{% endblock js %}

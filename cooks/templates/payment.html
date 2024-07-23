@@ -1,0 +1,76 @@
+{% extends "basic.html" %}
+{% block title %}Payment{% endblock title %}
+{% block css %}
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
+{% endblock css %}
+{% block body %}
+<h1>Make a Payment</h1>
+<div id="paypal-button-container"></div>
+<p id="result-message"></p>
+<a id="download-invoice" href="#" class="hidden">Download Invoice</a>
+
+<!-- Initialize the JS-SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=ATK72TKgaBhR8YgyYBfzdMdTpgcHOw5IyMS9eLaTgTBfSBCJRoewfO5rYxmN76m2vaPg8FDpie649yId&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo" data-sdk-integration-source="developer-studio"></script>
+
+<script>
+  function resultMessage(message) {
+    document.getElementById('result-message').innerHTML = message;
+  }
+
+  window.paypal
+  .Buttons({
+    style: {
+      shape: "rect",
+      layout: "vertical",
+      color: "gold",
+      label: "paypal",
+    },
+    async createOrder(data, actions) {
+      // Create the order on your server and return the order ID
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '100.00' // Replace with actual amount
+          }
+        }]
+      });
+    },
+    async onApprove(data, actions) {
+      try {
+        const response = await fetch(`/booking/${data.orderID}/capture`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const bookingData = await response.json();
+
+        if (bookingData.error) {
+          throw new Error(bookingData.error);
+        }
+
+        const transaction = bookingData.purchase_units[0].payments.captures[0];
+        resultMessage(`Transaction ${transaction.status}: ${transaction.id}<br><br>See console for all available details`);
+
+        document.getElementById('download-invoice').href = `/generate_invoice/${data.orderID}/`;
+        document.getElementById('download-invoice').classList.remove('hidden');
+      } catch (error) {
+        console.error(error);
+        resultMessage(`Sorry, your transaction could not be processed...<br><br>${error}`);
+      }
+    },
+    onError(err) {
+      console.error(err);
+      resultMessage('An error occurred during the transaction.');
+    }
+  })
+  .render("#paypal-button-container");
+</script>
+{% endblock body %}
+{% block js %}
+{% endblock js %}

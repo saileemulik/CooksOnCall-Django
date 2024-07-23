@@ -1,0 +1,50 @@
+{% extends "basic.html" %}
+{% block title %}Update Single{% endblock title %}
+{% block css %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        color: #4CAF50; /* Green color for the heading */
+        margin-bottom: 20px;
+    }
+
+    .btn-warning {
+        background-color: #f0ad4e;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-warning:hover {
+        background-color: #ec971f;
+    }
+
+   
+  
+</style>
+{% endblock css %}
+{% block body %}
+<div class="container-xxl py-5">   
+  <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+<h2>Update Single Profile</h2> 
+<a href="javascript:history.back()" class="btn btn-warning mb-3">Go Back</a>
+</div>
+<div class="row ">
+    <div class="col cwow fadeInUp" data-wow-delay="0.1s">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+{% endblock body %}
+{% block js %}{% endblock js %}

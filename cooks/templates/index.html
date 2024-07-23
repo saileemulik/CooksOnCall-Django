@@ -1,0 +1,66 @@
+{% extends "basic.html" %}
+{% load static %}
+ {% block title %}Home{% endblock title %}
+ {% block body %}
+ <div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container my-5 py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-3 text-white animated slideInLeft">Professional Cooks <br>On Call</h1>
+                <p class="text-white animated slideInLeft mb-4 pb-2">Experience the convenience of having expert chefs prepare delicious meals for your special occasions. Whether it's a family dinner, a party, or a corporate event, our skilled cooks are ready to turn your vision into reality.</p>
+                <!-- <a href="#booking-section" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book a Cook</a> -->
+            </div>
+            <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                {% comment %} <img class="img-fluid" src="/static/img/hero.jfif" alt=""> {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+{% comment %} <script src="script.js"></script> {% endcomment %}
+{% comment %} <script src="{% static 'js/main.js' %}"></script>
+<img src="{% static 'img/bg-hero.jfif' %}" alt="Hero Cooks"> {% endcomment %}
+
+ <div class="container-xxl py-5 bg-dark">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item rounded pt-3">
+                    <div class="p-3">
+                        <i class="fa fa-3x fa-utensils text-primary mb-3"></i>
+                        <h5>Professional Cooks</h5>
+                        <p class="mb-0">Expert chefs with diverse culinary expertise ready to cater to your needs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item rounded pt-3">
+                    <div class="p-3">
+                        <i class="fa fa-3x fa-calendar-alt text-primary mb-3"></i>
+                        <h5>Flexible Scheduling</h5>
+                        <p class="mb-0">Book your cook at your convenience, whether it's for a last-minute gathering or a planned event.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item rounded pt-3">
+                    <div class="p-3">
+                        <i class="fa fa-3x fa-home text-primary mb-3"></i>
+                        <h5>At-Home Cooking</h5>
+                        <p class="mb-0">Enjoy restaurant-quality meals prepared in the comfort of your own kitchen.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item rounded pt-3">
+                    <div class="p-3">
+                        <i class="fa fa-3x fa-thumbs-up text-primary mb-3"></i>
+                        <h5>Customer Satisfaction</h5>
+                        <p class="mb-0">We prioritize your satisfaction, ensuring each meal is tailored to your preferences and dietary requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+ {% endblock body %}

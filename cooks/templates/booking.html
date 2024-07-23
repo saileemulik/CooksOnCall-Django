@@ -1,0 +1,223 @@
+{% extends "basic.html" %}
+{% block title %}Booking{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Booking</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Booking</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="container-xxl  px-0 wow fadeInUp align-items-center" data-wow-delay="0.1s">
+    <div class="row g-0 ">
+<div class="bg-dark d-flex align-items-center px-5">
+    <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Cook Reservation</h5>
+        <h1 class="text-white mb-4 text-center">Book A Cook</h1>
+        <form method="get", action="/search/">
+            <div class="col-md-6 mb-3  align-items-center">
+                <div class="form-floating">
+                    <select class="form-select" name="search" id="search">
+                        <option value="Pav Bhaji">Pav Bhaji</option>
+                        <option value="Chicken">Chicken</option>
+                        <option value="Biryani">Biryani</option>
+                        <option value="Pizza">Pizza</option>
+                        <option value="Sushi">Sushi</option>
+                        <option value="Tacos">Tacos</option>
+                        <option value="Lasagna">Lasagna</option>
+                        <option value="Burgers">Burgers</option>
+                        <option value="Pasta">Pasta</option>
+                        <option value="Steak">Steak</option>
+                        <option value="Samosa">Samosa</option>
+                        <option value="Dumplings">Dumplings</option>
+                        <option value="Ramen">Ramen</option>
+                        <option value="Curry">Curry</option>
+                        <option value="Fish and Chips">Fish and Chips</option>
+                        <option value="Noodles">Noodles</option>
+                        <option value="Enchiladas">Enchiladas</option>
+                        <option value="Burritos">Burritos</option>
+                        <option value="Shawarma">Shawarma</option>
+                        <option value="Ravioli">Ravioli</option>
+                        <option value="Pad Thai">Pad Thai</option>
+                        <option value="Pho">Pho</option>
+                    </select>
+                    <label for="select1">Select Dish</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="form-floating">
+                    <select class="form-select" name="search" id="search">
+                        <option value="Indian">Indian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="American">American</option>
+                        <option value="French">French</option>
+<option value="Mexican">Mexican</option>
+<option value="Spanish">Spanish</option>
+<option value="Chineese">Chineese</option>
+<option value="Korean">Korean</option>
+<option value="Japanese">Japanese</option>
+<option value="Turkey">Turkey</option>
+<option value="Greek">Greek</option>
+<option value="Lebanese">Lebanese</option>
+<option value="Thai">Thai</option>
+<option value="Vietnamese">Vietnamese</option>
+
+                    </select>
+                    <label for="select2">Select Specialty</label>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100 py-3">Suggest Cooks</button>
+        </form>
+        
+    </div>
+    <form class="form-inline" method="get" action="/search/">
+        <input class="form-control mr-sm-2 mb-3 px-5" type="search" placeholder="Search By Typing" aria-label="Search" name="search" id="search">
+        <button class="btn btn-warning my-2 my-sm-0 px-5" type="submit">Search</button>
+    </form>
+</div>
+
+</div>
+</div>
+
+<div class="modal fade" id="cookModal" tabindex="-1" aria-labelledby="cookModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="cookModalLabel">Available Cooks and Teams</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<div id="cookList"></div>
+</div>
+</div>
+</div>
+</div>
+{% endblock body %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    let cooks = [];
+    let teams = [];
+    
+    function suggestCooks() {
+        const dish = document.getElementById("select1").value;
+        const speciality = document.getElementById("select2").value;
+    
+        // Construct query parameters for the GET request
+        const queryParams = new URLSearchParams({
+            dish,
+            speciality
+        }).toString();
+    
+        const cooksApiPath = `http://localhost:5000/api/form/cook?${queryParams}`;
+        const teamsApiPath = `http://localhost:5000/api/teams/team?${queryParams}`;
+    
+        fetch(cooksApiPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Cooks response:", data); // Debugging statement
+                cooks = data;
+                return fetch(teamsApiPath);
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Teams response:", data); // Debugging statement
+                teams = data;
+                displayCookList();
+            })
+            .catch(error => {
+                console.error('Error fetching suggested cooks and teams:', error);
+            });
+    }
+    
+    function displayCookList() {
+        const cookList = document.getElementById("cookList");
+        cookList.innerHTML = '';
+    
+        if (cooks.length > 0) {
+            const cookHeader = document.createElement("h4");
+            cookHeader.innerText = "Available Cooks:";
+            cookList.appendChild(cookHeader);
+            cooks.forEach((cook, index) => {
+                const cookCard = createCookCard(cook, index);
+                cookList.appendChild(cookCard);
+            });
+        }
+    
+        if (teams.length > 0) {
+            const teamHeader = document.createElement("h4");
+            teamHeader.innerText = "Available Teams:";
+            cookList.appendChild(teamHeader);
+            teams.forEach((team, index) => {
+                const teamCard = createTeamCard(team, index);
+                cookList.appendChild(teamCard);
+            });
+        }
+    
+        const cookModal = new bootstrap.Modal(document.getElementById('cookModal'));
+        cookModal.show();
+    }
+    
+    function createCookCard(cook, index) {
+        const cookCard = document.createElement("div");
+        cookCard.className = "card mb-3";
+        cookCard.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">${cook.fullName}</h5>
+                <p class="card-text">${cook.speciality}</p>
+                <p class="card-text">${cook.dish}</p>
+                <button class="btn btn-primary" onclick="bookCook(${index})">Book</button>
+            </div>
+        `;
+        return cookCard;
+    }
+    
+    function createTeamCard(team, index) {
+        const teamCard = document.createElement("div");
+        teamCard.className = "card mb-3";
+        teamCard.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">${team.fullName}</h5>
+                <p class="card-text">${team.speciality}</p>
+                <p class="card-text">${team.dish}</p>
+                <button class="btn btn-primary" onclick="bookTeam(${index})">Book</button>
+            </div>
+        `;
+        return teamCard;
+    }
+    
+    function bookCook(index) {
+        const selectedCook = cooks[index];
+        alert(`You have booked ${selectedCook.fullName}`);
+        // Additional code to handle booking can be added here
+    }
+    
+    function bookTeam(index) {
+        const selectedTeam = teams[index];
+        alert(`You have booked ${selectedTeam.fullName}`);
+        // Additional code to handle booking can be added here
+    }
+    
+    function makePayment() {
+        // Implement your payment logic here
+        alert("Payment");
+    }
+</script>
+{% endblock js %}

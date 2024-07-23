@@ -1,0 +1,176 @@
+{% extends "basic.html" %}
+{% block title %}Menu{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Food Menu</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Menu</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="container-xxl bg-white p-0">
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+            <h1 class="mb-5">Most Popular Items</h1>
+        </div>
+        <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+            <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                        <i class="fa fa-coffee fa-2x text-primary"></i>
+                        <div class="ps-3">
+                            <small class="text-body">Popular</small>
+                            <h6 class="mt-n1 mb-0">Breakfast</h6>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                        <i class="fa fa-hamburger fa-2x text-primary"></i>
+                        <div class="ps-3">
+                            <small class="text-body">Special</small>
+                            <h6 class="mt-n1 mb-0">Launch</h6>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                        <i class="fa fa-utensils fa-2x text-primary"></i>
+                        <div class="ps-3">
+                            <small class="text-body">Lovely</small>
+                            <h6 class="mt-n1 mb-0">Dinner</h6>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="d-flex align-items-center mb-4">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-1.jfif" alt="Paneer Tikka" style="width: 80px;">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                            <span>Paneer Tikka</span>
+                                            <span class="text-primary">-</span>
+                                        </h5>
+                                        <small class="fst-italic">Cubes of paneer marinated in spices and grilled to perfection.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="d-flex align-items-center mb-4">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-2.jfif" alt="Butter Chicken" style="width: 80px;">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                            <span>Butter Chicken</span>
+                                            <span class="text-primary">-</span>
+                                        </h5>
+                                        <small class="fst-italic">Tender chicken cooked in a creamy tomato-based sauce.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Repeat the above structure for more dishes -->
+                            <div class="col-lg-6">
+                                <div class="d-flex align-items-center mb-4">
+                                    <img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-3.jfif" alt="Biryani" style="width: 80px;">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                            <span>Biryani</span>
+                                            <span class="text-primary">-</span>
+                                        </h5>
+                                        <small class="fst-italic">Fragrant rice cooked with spices and your choice of meat or vegetables.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Dish 4 -->
+<div class="col-lg-6">
+<div class="d-flex align-items-center mb-4">
+<img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-4.jfif" alt="Chole Bhature" style="width: 80px;">
+<div class="w-100 d-flex flex-column text-start ps-4">
+    <h5 class="d-flex justify-content-between border-bottom pb-2">
+        <span>Chole Bhature</span>
+        <span class="text-primary">-</span>
+    </h5>
+    <small class="fst-italic">Spicy chickpea curry served with fried bread.</small>
+</div>
+</div>
+</div>
+
+<!-- Dish 5 -->
+<div class="col-lg-6">
+<div class="d-flex align-items-center mb-4">
+<img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-5.jfif" alt="Palak Paneer" style="width: 80px;">
+<div class="w-100 d-flex flex-column text-start ps-4">
+    <h5 class="d-flex justify-content-between border-bottom pb-2">
+        <span>Palak Paneer</span>
+        <span class="text-primary">-</span>
+    </h5>
+    <small class="fst-italic">Fresh spinach cooked with paneer and aromatic spices.</small>
+</div>
+</div>
+</div>
+
+<!-- Dish 6 -->
+<div class="col-lg-6">
+<div class="d-flex align-items-center mb-4">
+<img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-6.jfif" alt="Masala Dosa" style="width: 80px;">
+<div class="w-100 d-flex flex-column text-start ps-4">
+    <h5 class="d-flex justify-content-between border-bottom pb-2">
+        <span>Masala Dosa</span>
+        <span class="text-primary">-</span>
+    </h5>
+    <small class="fst-italic">Thin crepe filled with spiced potato filling, served with chutneys.</small>
+</div>
+</div>
+</div>
+
+<!-- Dish 7 -->
+<div class="col-lg-6">
+<div class="d-flex align-items-center mb-4">
+<img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-7.jfif" alt="Rogan Josh" style="width: 80px;">
+<div class="w-100 d-flex flex-column text-start ps-4">
+    <h5 class="d-flex justify-content-between border-bottom pb-2">
+        <span>Rogan Josh</span>
+        <span class="text-primary">-</span>
+    </h5>
+    <small class="fst-italic">Tender lamb cooked with a blend of aromatic spices.</small>
+</div>
+</div>
+</div>
+
+<!-- Dish 8 -->
+<div class="col-lg-6">
+<div class="d-flex align-items-center mb-4">
+<img class="flex-shrink-0 img-fluid rounded" src="/static/img/menu-8.jfif" alt="Pani Puri" style="width: 80px;">
+<div class="w-100 d-flex flex-column text-start ps-4">
+    <h5 class="d-flex justify-content-between border-bottom pb-2">
+        <span>Pani Puri</span>
+        <span class="text-primary">-</span>
+    </h5>
+    <small class="fst-italic">Crispy hollow puris filled with spicy tamarind water.</small>
+</div>
+</div>
+</div>
+
+                            <!-- Repeat the above structure for more dishes -->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}
+{% block js %}{% endblock js %}

@@ -1,0 +1,32 @@
+{% extends "basic.html" %}
+{% block title %}Cook Registration{% endblock title %}
+{% block css %}
+    <!-- No additional CSS needed as we will use only Bootstrap classes -->
+{% endblock css %}
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header bg-primary text-white">Cook Registration Form</h5>
+                <div class="card-body">
+                    <form method="post" action="/cook/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+    
+                        <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                    </form>
+                    {% if form.errors %}
+        <div class="form-errors">
+            {{ form.errors }}
+        </div>
+    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}
+    <!-- Include any JavaScript files or scripts if needed -->
+{% endblock js %}

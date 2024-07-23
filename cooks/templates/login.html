@@ -1,0 +1,98 @@
+{% extends "basic.html" %}
+{% block title %}Login{% endblock title %}
+{% block css %}
+body{
+    text-align: center;
+}
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ea9f1dcc; 
+  }
+  
+  .form {
+    background-color: #ffffff; 
+    padding: 30px;
+    width: 80%; 
+    max-width: 430px; 
+    border-radius: 15px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease; 
+    margin-top: -50px;
+  }
+  
+  .mt-4 {
+    padding: 15px 30px 15px 15px;
+    border: none;
+    border-bottom: 2px solid #b5b1b1;
+    border-radius: 5px;
+    background-color: transparent;
+    width: calc(100% - 40px);
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  input[type="radio"] {
+    margin-right: 5px; 
+    vertical-align: middle;
+  }
+
+  
+  p {
+    margin: 20px 0; }
+  
+  .center {
+    display: block;
+    margin: 0 auto;
+  }
+  button:hover {
+    background-color: #555;
+  }
+  h6 {
+    margin-top: 20px;
+    color: #333;
+  }
+ .fa-regular,.fa-solid{
+    color: #b5b1b1; /* Placeholder color */
+     left: 10px;
+ }
+{% endblock css %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-header">Login</div>
+              <div class="card-body">
+                  <form method="post" action="{% url 'handleLogin' %}">
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <label for="loginusername">Username</label>
+                          <input type="text" class="form-control" id="loginusername" name="loginusername" required>
+                      </div>
+                      <div class="form-group mt-3">
+                          <label for="loginpassword">Password</label>
+                          <input type="password" class="form-control" id="loginpassword" name="loginpassword" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-3">Login</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock body %}
+{% block js %}{% endblock js %}

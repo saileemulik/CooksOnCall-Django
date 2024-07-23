@@ -1,0 +1,11 @@
+<!-- templates/payment/success.html -->
+
+{% extends "basic.html" %}
+{% block title %}About Us{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<h1>Payment Successful</h1>
+<a href="{% url 'download_file' %}">Download Your File</a>
+{% endblock body %}
+{% block js %}{% endblock js %}
+

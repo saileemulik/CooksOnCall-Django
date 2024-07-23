@@ -1,0 +1,17 @@
+{% extends "basic.html" %}
+{% block title %}{{ cook.username }}'s Profile{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<img src="{{ cook.photo.url }}" alt="Cook's Photo" width="200px" height="300px">
+<h1>{{ cook.username }}</h1>
+<p>Speciality: {{ cook.speciality }}</p>
+<p>Dish: {{ cook.dish }}</p>
+<p>Experience: {{ cook.experience }} years</p>
+<p>Email: {{cook.email}}</p>
+{% if is_single  %}
+        <p>Gender: {{ cook.gender }}</p>
+    {% endif %}
+    <p>Team Name: {{cook.teamName}}</p>
+<p>Extra Details: {{cook.desc}}</p>
+{% endblock body %}
+{% block js %}{% endblock js %}

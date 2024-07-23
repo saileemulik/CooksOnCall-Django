@@ -1,0 +1,23 @@
+{% extends "basic.html" %}
+{% block title %}Team{% endblock title %}
+{% block css %}{% endblock css %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Team Registration Form </div>
+                <div class="card-body">
+                    <form method="post" action="/teamreg/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-warning mt-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock body %}
+{% block js %}{% endblock js %}
